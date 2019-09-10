@@ -1,0 +1,31 @@
+{
+  "name": "graphql-server-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --watch ./src -e ts,yaml --exec ts-node -- --project ./tsconfig.json ./src/app",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://JayJayDeeee@bitbucket.org/JayJayDeeee/graphql-server-example.git"
+  },
+  "author": "JayJayDee <jindongp@gmail.com> (http://chatpot.chat)",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/JayJayDeeee/graphql-server-example#readme",
+  "dependencies": {
+    "apollo-server": "^2.9.3",
+    "graphql": "^14.5.4",
+    "reflect-metadata": "^0.1.13",
+    "type-graphql": "^0.17.5",
+    "typeorm": "^0.2.18"
+  },
+  "devDependencies": {
+    "@types/graphql": "^14.5.0",
+    "nodemon": "^1.19.2",
+    "ts-node": "^8.3.0",
+    "tslib": "^1.10.0",
+    "typescript": "^3.6.2"
+  }
+}
