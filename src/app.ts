@@ -1,27 +1,27 @@
 import 'reflect-metadata';
 import { ApolloServer } from 'apollo-server';
-import { ObjectType, Field, ID, Resolver, Arg, Query, buildSchema } from 'type-graphql';
-import { createConnection, Entity, PrimaryGeneratedColumn, Column, getConnection } from 'typeorm';
+import { Resolver, Query, Arg, buildSchema } from 'type-graphql';
+import { getConnection, createConnection } from 'typeorm';
 
-@ObjectType()
-@Entity({ name: 'message' })
-class Message {
-  @Field(type => ID)
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @Field({ nullable: true })
-  @Column({ nullable: true, length: 30 })
-  text?: string;
-}
+import { Message } from './graph-models';
+import { MessageModel } from './orm-models';
 
 @Resolver(of => Message)
 class MessageResolver {
 
   @Query(returns => Message)
   async message(@Arg('id') id: number): Promise<Message | undefined> {
-    const msg = await getConnection().getRepository(Message).findOne(id);
-    return msg;
+    const msg = await getConnection().getRepository(MessageModel).findOne(id);
+    if (!msg) return undefined;
+    return {
+      id: msg.id,
+      text: msg.text,
+      image: msg.imageUrl && msg.thumbUrl ? {
+        imageUrl: msg.imageUrl,
+        thumbUrl: msg.thumbUrl
+      } : undefined,
+      publishDate: msg.publishDate
+    };
   }
 }
 
@@ -38,7 +38,8 @@ class MessageResolver {
   });
 
   const schema = await buildSchema({
-    resolvers: [ MessageResolver ]
+    resolvers: [ MessageResolver ],
+    nullableByDefault: true
   });
 
   const server = new ApolloServer({
