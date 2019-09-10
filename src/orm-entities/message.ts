@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity('message')
 export class MessageModel {
@@ -14,7 +14,4 @@ export class MessageModel {
 
   @Column({ nullable: true, length: 100 })
   public thumbUrl?: string;
-
-  @CreateDateColumn()
-  public publishDate: Date;
 }

@@ -19,7 +19,4 @@ export class Message {
 
   @Field(type => ImageContent, { nullable: true })
   image?: ImageContent;
-
-  @Field()
-  publishDate: Date;
 }

@@ -1,29 +1,10 @@
 import 'reflect-metadata';
 import { ApolloServer } from 'apollo-server';
-import { Resolver, Query, Arg, buildSchema } from 'type-graphql';
-import { getConnection, createConnection } from 'typeorm';
+import { buildSchema } from 'type-graphql';
+import { createConnection } from 'typeorm';
 
-import { Message } from './graph-models';
-import { MessageModel } from './orm-models';
-
-@Resolver(of => Message)
-class MessageResolver {
-
-  @Query(returns => Message)
-  async message(@Arg('id') id: number): Promise<Message | undefined> {
-    const msg = await getConnection().getRepository(MessageModel).findOne(id);
-    if (!msg) return undefined;
-    return {
-      id: msg.id,
-      text: msg.text,
-      image: msg.imageUrl && msg.thumbUrl ? {
-        imageUrl: msg.imageUrl,
-        thumbUrl: msg.thumbUrl
-      } : undefined,
-      publishDate: msg.publishDate
-    };
-  }
-}
+import { AllResolvers } from './graph-resolvers';
+import { AllModels } from './graph-models';
 
 (async () => {
   await createConnection({
@@ -33,12 +14,12 @@ class MessageResolver {
     username: 'root',
     password: 'hands',
     database: 'typeorm_test',
-    entities: [ Message ],
+    entities: AllModels,
     synchronize: true
   });
 
   const schema = await buildSchema({
-    resolvers: [ MessageResolver ],
+    resolvers: AllResolvers,
     nullableByDefault: true
   });
 
