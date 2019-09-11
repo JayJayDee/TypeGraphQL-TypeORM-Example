@@ -37,5 +37,5 @@ import { initConfiguration, MysqlConfigToken, HttpConfigToken } from './configur
   });
 
   const { url } = await server.listen(http.port);
-  console.log(`server started: ${url}`);
+  console.log(`GraphQL Server Started: ${url}`);
 })();
