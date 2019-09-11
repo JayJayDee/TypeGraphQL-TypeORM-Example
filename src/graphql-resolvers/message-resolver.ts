@@ -1,6 +1,7 @@
 import { Resolver, Query, Arg } from 'type-graphql';
 import { getConnection } from 'typeorm';
-import { Message } from '../graph-models';
+
+import { Message } from '../graphql-models';
 import { MessageModel } from '../orm-entities';
 
 @Resolver(of => Message)
@@ -13,10 +14,11 @@ export class MessageResolver {
     return {
       id: msg.id,
       text: msg.text,
-      image: msg.imageUrl && msg.thumbUrl ? {
-        imageUrl: msg.imageUrl,
-        thumbUrl: msg.thumbUrl
-      } : undefined
+      image:
+        msg.imageUrl && msg.thumbUrl ? {
+          imageUrl: msg.imageUrl,
+          thumbUrl: msg.thumbUrl
+        } : undefined
     };
   }
 }

@@ -3,8 +3,8 @@ import { ApolloServer } from 'apollo-server';
 import { buildSchema } from 'type-graphql';
 import { createConnection } from 'typeorm';
 
-import { AllResolvers } from './graph-resolvers';
-import { AllModels } from './graph-models';
+import { AllResolvers } from './graphql-resolvers';
+import { AllModels } from './graphql-models';
 
 (async () => {
   await createConnection({

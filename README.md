@@ -1,5 +1,8 @@
 # TypeGraphQL-TypeORM-Example
-Demonstrates a example with TypeGraphQL + TypeORM.
+An example for the TypeGraphQL, TypeORM.
+
+## Features
+- High-readability code.
 
 ## How to run
 TBD
