@@ -10,7 +10,7 @@ export const loadConfigurations =
       const parsed = config({ path: dotEnvPath }).parsed;
       if (parsed) source = parsed;
       else {
-        throw new Error('malformed dotenv file');
+        throw new Error(`dotenv file not found or malformed dotenv file: ${dotEnvPath}`);
       }
     } else {
       source = env;

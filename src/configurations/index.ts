@@ -1,10 +1,18 @@
 import { Token, Container } from 'typedi';
 import { loadConfigurations } from './config-loader';
 
+const MysqlConfigToken = new Token<MysqlConfig>();
+const HttpConfigToken = new Token<HttpConfig>();
+
 export {
   MysqlConfig,
   HttpConfig
 } from './types';
+
+export {
+  MysqlConfigToken,
+  HttpConfigToken
+};
 
 import {
   MysqlConfig,
@@ -19,6 +27,6 @@ export const initConfiguration = async () => {
   const mysql = mysqlConfigMapper(env);
   const http = httpConfigMapper(env);
 
-  Container.set(new Token<MysqlConfig>(), mysql());
-  Container.set(new Token<HttpConfig>(), http());
+  Container.set(MysqlConfigToken, mysql());
+  Container.set(HttpConfigToken, http());
 };

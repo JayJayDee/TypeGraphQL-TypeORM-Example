@@ -2,21 +2,26 @@ import 'reflect-metadata';
 import { ApolloServer } from 'apollo-server';
 import { buildSchema } from 'type-graphql';
 import { createConnection } from 'typeorm';
+import { Container } from 'typedi';
 
 import { AllResolvers } from './graphql-resolvers';
 import { AllModels } from './graphql-models';
-import { initConfiguration } from './configurations';
+import { initConfiguration, MysqlConfigToken, HttpConfigToken } from './configurations';
 
 (async () => {
   await initConfiguration();
 
+  const mysql = Container.get(MysqlConfigToken);
+  const http = Container.get(HttpConfigToken);
+
   await createConnection({
     name: 'default',
     type: 'mysql',
-    host: '127.0.0.1',
-    username: 'root',
-    password: 'hands',
-    database: 'typeorm_test',
+    host: mysql.host,
+    port: mysql.port,
+    username: mysql.user,
+    password: mysql.password,
+    database: mysql.database,
     entities: AllModels,
     synchronize: true
   });
@@ -31,6 +36,6 @@ import { initConfiguration } from './configurations';
     playground: true
   });
 
-  const { url } = await server.listen(3000);
+  const { url } = await server.listen(http.port);
   console.log(`server started: ${url}`);
 })();
