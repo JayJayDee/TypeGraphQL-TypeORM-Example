@@ -1,7 +1,5 @@
-export { MessageEntity } from './message';
-
-import { MessageEntity } from './message';
+import { PlayerEntity } from './player';
 
 export const AllEntities = [
-  MessageEntity
+  PlayerEntity
 ];
