@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 import { Field, ID, ObjectType, registerEnumType } from 'type-graphql';
+import { Player } from './player';
 
 enum PokemonType {
   NORMAL,
@@ -29,4 +30,10 @@ export class Pokemon {
 
   @Field(type => PokemonType)
   type: PokemonType;
+
+  @Field()
+  level: number;
+
+  @Field(type => [ Player ])
+  ownPlayers: Player[];
 }
