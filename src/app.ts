@@ -5,7 +5,7 @@ import { createConnection } from 'typeorm';
 import { Container } from 'typedi';
 
 import { AllResolvers } from './graphql-resolvers';
-import { AllModels } from './graphql-models';
+import { AllEntities } from './orm-entities';
 import { initConfiguration, MysqlConfigToken, HttpConfigToken } from './configurations';
 import { initLogger, LoggerToken } from './loggers';
 
@@ -25,7 +25,7 @@ import { initLogger, LoggerToken } from './loggers';
     username: mysql.user,
     password: mysql.password,
     database: mysql.database,
-    entities: AllModels,
+    entities: AllEntities,
     synchronize: true
   });
 

@@ -2,14 +2,14 @@ import { Resolver, Query, Arg } from 'type-graphql';
 import { getConnection } from 'typeorm';
 
 import { Message } from '../graphql-models';
-import { MessageModel } from '../orm-entities';
+import { MessageEntity } from '../orm-entities';
 
 @Resolver(of => Message)
 export class MessageResolver {
 
   @Query(returns => Message)
   async message(@Arg('id') id: number): Promise<Message | undefined> {
-    const msg = await getConnection().getRepository(MessageModel).findOne(id);
+    const msg = await getConnection().getRepository(MessageEntity).findOne(id);
     if (!msg) return undefined;
     return {
       id: msg.id,
