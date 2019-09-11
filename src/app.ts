@@ -7,12 +7,15 @@ import { Container } from 'typedi';
 import { AllResolvers } from './graphql-resolvers';
 import { AllModels } from './graphql-models';
 import { initConfiguration, MysqlConfigToken, HttpConfigToken } from './configurations';
+import { initLogger, LoggerToken } from './loggers';
 
 (async () => {
   await initConfiguration();
-
   const mysql = Container.get(MysqlConfigToken);
   const http = Container.get(HttpConfigToken);
+
+  await initLogger();
+  const log = Container.get(LoggerToken);
 
   await createConnection({
     name: 'default',
@@ -37,5 +40,5 @@ import { initConfiguration, MysqlConfigToken, HttpConfigToken } from './configur
   });
 
   const { url } = await server.listen(http.port);
-  console.log(`GraphQL Server Started: ${url}`);
+  log.info(`GraphQL Server Started: ${url}`);
 })();

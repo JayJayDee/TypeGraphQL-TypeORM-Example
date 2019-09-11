@@ -1,4 +1,4 @@
-import { MysqlConfig, HttpConfig } from './types';
+import { MysqlConfig, HttpConfig, LogConfig } from './types';
 
 class ConfigurationNotSuppliedError extends Error {
   constructor(msg: string) {
@@ -44,4 +44,11 @@ export const httpConfigMapper: ConfigLoader<HttpConfig> =
   (source) => () =>
     ({
       port: read(source) ({ key: 'HTTP_PORT', mandantory: true })
+    });
+
+// log configuration loader.
+export const logConfigMapper: ConfigLoader<LogConfig> =
+  (source) => () =>
+    ({
+      level: read(source) ({ key: 'LOG_LEVEL', mandantory: false, defaultValue: 'DEBUG' })
     });

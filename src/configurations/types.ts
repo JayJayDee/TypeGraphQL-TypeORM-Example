@@ -9,3 +9,7 @@ export type MysqlConfig = {
 export type HttpConfig = {
   port: number;
 };
+
+export type LogConfig = {
+  level: 'INFO' | 'DEBUG' | 'ERROR';
+};

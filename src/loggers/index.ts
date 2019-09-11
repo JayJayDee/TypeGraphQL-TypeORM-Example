@@ -1,4 +1,6 @@
 import { Token, Container } from 'typedi';
+import { LogConfigToken } from '../configurations';
+
 import { initSimpleLogger } from './default-simple-logger';
 
 export {
@@ -13,6 +15,8 @@ const LoggerToken = new Token<Logger>();
 export { LoggerToken };
 
 export const initLogger = async () => {
-  const logger = initSimpleLogger();
+  const logCfg = Container.get(LogConfigToken);
+  const logger = initSimpleLogger(logCfg);
+
   Container.set(LoggerToken, logger);
 };
