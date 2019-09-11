@@ -7,9 +7,11 @@ export const loadConfigurations =
     // if the DOTENV_PATH environment variable exists, load the dotenv file.
     const dotEnvPath = env['DOTENV_PATH'];
     if (dotEnvPath) {
-      source = config({
-        path: dotEnvPath
-      });
+      const parsed = config({ path: dotEnvPath }).parsed;
+      if (parsed) source = parsed;
+      else {
+        throw new Error('malformed dotenv file');
+      }
     } else {
       source = env;
     }

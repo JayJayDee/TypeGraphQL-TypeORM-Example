@@ -33,6 +33,7 @@ export const mysqlConfigMapper: ConfigLoader<MysqlConfig> =
   (source) => () =>
     ({
       host: read(source) ({ key: 'MYSQL_HOST', mandantory: true }),
+      port: read(source) ({ key: 'MYSQL_PORT', mandantory: false, defaultValue: 3306 }),
       user: read(source) ({ key: 'MYSQL_USER', mandantory: true }),
       password: read(source) ({ key: 'MYSQL_PASSWORD', mandantory: true }),
       database: read(source) ({ key: 'MYSQL_DATABASE', mandantory: true })
