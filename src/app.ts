@@ -5,8 +5,11 @@ import { createConnection } from 'typeorm';
 
 import { AllResolvers } from './graphql-resolvers';
 import { AllModels } from './graphql-models';
+import { initConfiguration } from './configurations';
 
 (async () => {
+  await initConfiguration();
+
   await createConnection({
     name: 'default',
     type: 'mysql',

@@ -16,13 +16,16 @@
   "homepage": "https://bitbucket.org/JayJayDeeee/graphql-server-example#readme",
   "dependencies": {
     "apollo-server": "^2.9.3",
+    "dotenv": "^8.1.0",
     "graphql": "^14.5.4",
     "mysql2": "^1.7.0",
     "reflect-metadata": "^0.1.13",
     "type-graphql": "^0.17.5",
+    "typedi": "^0.8.0",
     "typeorm": "^0.2.18"
   },
   "devDependencies": {
+    "@types/dotenv": "^6.1.1",
     "@types/graphql": "^14.5.0",
     "chai": "^4.2.0",
     "mocha": "^6.2.0",

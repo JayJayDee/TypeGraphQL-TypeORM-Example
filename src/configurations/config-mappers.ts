@@ -29,7 +29,7 @@ export const read = (source: Source) =>
   };
 
 // mysql configuration loader.
-export const mysqlConfigLoader: ConfigLoader<MysqlConfig> =
+export const mysqlConfigMapper: ConfigLoader<MysqlConfig> =
   (source) => () =>
     ({
       host: read(source) ({ key: 'MYSQL_HOST', mandantory: true }),
@@ -39,7 +39,7 @@ export const mysqlConfigLoader: ConfigLoader<MysqlConfig> =
     });
 
 // http configuration loader.
-export const httpConfigLoader: ConfigLoader<HttpConfig> =
+export const httpConfigMapper: ConfigLoader<HttpConfig> =
   (source) => () =>
     ({
       port: read(source) ({ key: 'HTTP_PORT', mandantory: true })
