@@ -1,7 +1,10 @@
-import { PokemonResolver } from './pokemon-resolver';
-import { PlayerResolver } from './player-resolver';
+export const AllResolvers = () => {
+  // for lazy-load with typeDI.
+  const { PokemonResolver } = require('./pokemon-resolver');
+  const { PlayerResolver } = require('./player-resolver');
 
-export const AllResolvers = [
-  PokemonResolver,
-  PlayerResolver
-];
+  return [
+    PokemonResolver,
+    PlayerResolver
+  ];
+};

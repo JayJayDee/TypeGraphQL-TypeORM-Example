@@ -24,7 +24,7 @@ import { pourInitialData } from './initial-data-pourer';
   await pourInitialData();
 
   const schema = await buildSchema({
-    resolvers: AllResolvers,
+    resolvers: AllResolvers(),
     nullableByDefault: true
   });
 
