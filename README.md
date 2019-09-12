@@ -1,15 +1,31 @@
 # TypeGraphQL-TypeORM-Example
-An example for the TypeGraphQL, TypeORM.
+An example GraphQL server application which written with [TypeGraphQL](https://typegraphql.ml) + [TypeORM](https://typeorm.io).
 
 ## Features
-- High-readability code.
+- High code readability.
+- Test codes.
+- Lazy initialization.
+- Using [TypeDI](https://github.com/typestack/typedi) as a container & dependency injector.
+
+## DB E-R Diagram
+the DB relation diagram is same as follows. you can also check this out in `src/orm-entities/` directory. implemented with [TypeORM](https://typeorm.io) entities.
+![DB E-R Diagram](https://raw.githubusercontent.com/JayJayDee/TypeGraphQL-TypeORM-Example/master/assets/erd.png)
+
+## How to configure application
+TBD
+
 
 ## How to run
-TBD
+```bash
+$ npm install
+$ npm run dev
+```
 
-## How to run unit test
-TBD
+## How to run unit test with Mocha + Chai
+```bash
+$ npm run test
+```
 
 ## Next step
 - nested GraphQL schema example
-- nested (releation between tables) entities example
+- nested (releation between tables) entities example -> done
