@@ -1,4 +1,5 @@
 import { Container } from 'typedi';
+import uuid from 'uuid/v4';
 import { LoggerToken } from '../loggers';
 import { ConnectionToken } from '../orm-initiator';
 import { PlayerEntity } from '../orm-entities';
@@ -23,3 +24,9 @@ const isDataExists = async () => {
   if (dataSize === 0) return false;
   return true;
 };
+
+export const pokemons = () => ([
+  {
+    id: uuid()
+  }
+]);
