@@ -9,6 +9,9 @@ An example GraphQL server application which written with [TypeGraphQL](https://t
 
 ## DB E-R Diagram
 the DB relation diagram is same as follows. you can also check this out in `src/orm-entities/` directory. implemented with [TypeORM](https://typeorm.io) entities.
+
+
+
 ![DB E-R Diagram](https://raw.githubusercontent.com/JayJayDee/TypeGraphQL-TypeORM-Example/master/assets/erd.png)
 
 ## How to configure application
