@@ -1,4 +1,5 @@
-import { PrimaryGeneratedColumn, Column, Entity } from 'typeorm';
+import { PrimaryGeneratedColumn, Column, Entity, ManyToMany } from 'typeorm';
+import { PokemonEntity } from './pokemon';
 
 @Entity('player')
 export class PlayerEntity {
@@ -14,4 +15,7 @@ export class PlayerEntity {
 
   @Column()
   public fund: number;
+
+  @ManyToMany(type => PokemonEntity, pokemon => pokemon.ownedBy)
+  pokemons: PokemonEntity[];
 }
