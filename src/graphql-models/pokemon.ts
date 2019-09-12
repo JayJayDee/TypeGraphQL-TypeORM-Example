@@ -35,5 +35,5 @@ export class Pokemon {
   level: number;
 
   @Field(type => [ Player ])
-  ownPlayers: Player[];
+  ownedBy: Player[];
 }
