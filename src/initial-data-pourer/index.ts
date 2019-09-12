@@ -5,6 +5,7 @@ import { PlayerEntity } from '../orm-entities';
 
 const tag = '[initial-data-pourer]';
 
+// pours initial data to database.
 export const pourInitialData = async () => {
   const log = Container.get(LoggerToken);
 
@@ -15,6 +16,7 @@ export const pourInitialData = async () => {
   log.info(`${tag} initial data poured to the database.`);
 };
 
+// returns is data exists
 const isDataExists = async () => {
   const connection = Container.get(ConnectionToken);
   const dataSize = await connection.getRepository(PlayerEntity).count();
