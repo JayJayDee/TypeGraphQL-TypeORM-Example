@@ -27,6 +27,21 @@ const isDataExists = async () => {
 
 export const pokemons = () => ([
   {
-    id: uuid()
+    id: uuid(),
+    name: 'Pikachu',
+    level: 12,
+    type: 'ELECTRIC'
+  },
+  {
+    id: uuid(),
+    name: 'Salamander',
+    level: 19,
+    type: 'FIRE'
+  },
+  {
+    id: uuid(),
+    name: 'Bulbarsar',
+    level: 17,
+    type: 'GRASS'
   }
 ]);
