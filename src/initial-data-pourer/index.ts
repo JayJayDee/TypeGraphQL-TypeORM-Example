@@ -1,10 +1,21 @@
 import { Container } from 'typedi';
-import uuid from 'uuid/v4';
+import * as uuid from 'uuid/v4';
 import { LoggerToken } from '../loggers';
 import { ConnectionToken } from '../orm-initiator';
-import { PlayerEntity } from '../orm-entities';
+import { PlayerEntity, PokemonEntity } from '../orm-entities';
 
 const tag = '[initial-data-pourer]';
+
+enum PokemonType {
+  NORMAL = 'NORMAL',
+  FLYING = 'FLYING',
+  FIGHTING = 'FIGHTING',
+  ELECTRIC = 'ELECTRIC',
+  FIRE = 'FIRE',
+  WATER = 'WATER',
+  ROCK = 'ROCK',
+  GRASS = 'GRASS'
+}
 
 // pours initial data to database.
 export const pourInitialData = async () => {
@@ -13,7 +24,15 @@ export const pourInitialData = async () => {
   if (await isDataExists() === true) {
     log.info(`${tag} data exists.. ignored.`);
   }
-  // const connection = Container.get(ConnectionToken);
+  const connection = Container.get(ConnectionToken);
+
+  await connection
+    .createQueryBuilder()
+    .insert()
+    .into(PokemonEntity)
+    .values(pokemons())
+    .execute();
+
   log.info(`${tag} initial data poured to the database.`);
 };
 
@@ -30,18 +49,36 @@ export const pokemons = () => ([
     id: uuid(),
     name: 'Pikachu',
     level: 12,
-    type: 'ELECTRIC'
+    type: PokemonType.ELECTRIC
   },
   {
     id: uuid(),
     name: 'Salamander',
     level: 19,
-    type: 'FIRE'
+    type: PokemonType.FIRE
   },
   {
     id: uuid(),
     name: 'Bulbarsar',
     level: 17,
-    type: 'GRASS'
+    type: PokemonType.GRASS
+  },
+  {
+    id: uuid(),
+    name: 'Machop',
+    level: 15,
+    type: PokemonType.FIGHTING
+  },
+  {
+    id: uuid(),
+    name: 'Rattata',
+    level: 12,
+    type: PokemonType.NORMAL
+  },
+  {
+    id: uuid(),
+    name: 'Pidgey',
+    level: 9,
+    type: PokemonType.FLYING
   }
 ]);

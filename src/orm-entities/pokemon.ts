@@ -2,14 +2,14 @@ import { PrimaryGeneratedColumn, Column, Entity, ManyToMany, JoinTable } from 't
 import { PlayerEntity } from './player';
 
 enum PokemonType {
-  NORMAL,
-  FLYING,
-  FIGHTING,
-  ELECTRIC,
-  FIRE,
-  WATER,
-  ROCK,
-  GRASS
+  NORMAL = 'NORMAL',
+  FLYING = 'FLYING',
+  FIGHTING = 'FIGHTING',
+  ELECTRIC = 'ELECTRIC',
+  FIRE = 'FIRE',
+  WATER = 'WATER',
+  ROCK = 'ROCK',
+  GRASS = 'GRASS'
 }
 
 @Entity('pokemon')
@@ -18,7 +18,7 @@ export class PokemonEntity {
   @PrimaryGeneratedColumn()
   public no: number;
 
-  @Column({ length: 30, unique: true })
+  @Column({ length: 80, unique: true })
   public id: string;
 
   @Column({ length: 30 })
