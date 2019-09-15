@@ -18,7 +18,7 @@ export class PokemonEntity {
   @PrimaryGeneratedColumn()
   public no: number;
 
-  @Column({ length: 80, unique: true })
+  @Column({ length: 50, unique: true })
   public id: string;
 
   @Column({ length: 30 })

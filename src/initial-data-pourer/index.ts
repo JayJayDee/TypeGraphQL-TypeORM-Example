@@ -23,15 +23,47 @@ export const pourInitialData = async () => {
 
   if (await isDataExists() === true) {
     log.info(`${tag} data exists.. ignored.`);
+    return;
   }
+
   const connection = Container.get(ConnectionToken);
 
   await connection
     .createQueryBuilder()
     .insert()
     .into(PokemonEntity)
-    .values(pokemons())
+    .values(initialPokemons())
     .execute();
+
+  await connection
+    .createQueryBuilder()
+    .insert()
+    .into(PlayerEntity)
+    .values(initialPlayers())
+    .execute();
+
+  const playerRepo = connection.getRepository(PlayerEntity);
+  const pokemonRepo = connection.getRepository(PokemonEntity);
+
+  const player = await playerRepo.findOne({ name: 'Jaydee' });
+  if (player) {
+    const pokemons = [
+      ... await pokemonRepo.find({ name: 'Pikachu' }),
+      ... await pokemonRepo.find({ name: 'Salamander' })
+    ];
+    player.pokemons = pokemons;
+    await playerRepo.save(player);
+  }
+
+  const player2 = await playerRepo.findOne({ name: 'Yongsuli '});
+  if (player2) {
+    const pokemons = [
+      ... await pokemonRepo.find({ name: 'Rattata' }),
+      ... await pokemonRepo.find({ name: 'Pidgey' })
+    ];
+    player2.pokemons = pokemons;
+    await playerRepo.save(player2);
+  }
 
   log.info(`${tag} initial data poured to the database.`);
 };
@@ -44,7 +76,25 @@ const isDataExists = async () => {
   return true;
 };
 
-export const pokemons = () => ([
+export const initialPlayers = () => ([
+  {
+    id: uuid(),
+    name: 'Jaydee',
+    fund: 12000
+  },
+  {
+    id: uuid(),
+    name: 'Seoul',
+    fund: 8000
+  },
+  {
+    id: uuid(),
+    name: 'Yongsuli',
+    fund: 6000
+  }
+]);
+
+export const initialPokemons = () => ([
   {
     id: uuid(),
     name: 'Pikachu',
@@ -55,7 +105,7 @@ export const pokemons = () => ([
     id: uuid(),
     name: 'Salamander',
     level: 19,
-    type: PokemonType.FIRE
+    type: PokemonType.FIGHTING
   },
   {
     id: uuid(),
@@ -66,19 +116,19 @@ export const pokemons = () => ([
   {
     id: uuid(),
     name: 'Machop',
-    level: 15,
+    level: 12,
     type: PokemonType.FIGHTING
   },
   {
     id: uuid(),
     name: 'Rattata',
-    level: 12,
+    level: 15,
     type: PokemonType.NORMAL
   },
   {
     id: uuid(),
     name: 'Pidgey',
-    level: 9,
+    level: 12,
     type: PokemonType.FLYING
   }
 ]);
