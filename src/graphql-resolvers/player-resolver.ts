@@ -22,6 +22,6 @@ export class PlayerResolver {
 
   @Query(returns => [ Player ])
   async players(): Promise<Player[]> {
-    return await this.playerRepo.find();
+    return await this.playerRepo.find({ relations: [ 'pokemons', 'items' ] });
   }
 }
