@@ -17,11 +17,15 @@ export class PlayerResolver {
 
   @Query(returns => Player)
   async player(@Arg('id') id: string): Promise<Player | undefined> {
-    return await this.playerRepo.findOne({ id });
+    return await this.playerRepo.findOne({ id }, {
+      relations: [ 'pokemons', 'items' ]
+    });
   }
 
   @Query(returns => [ Player ])
   async players(): Promise<Player[]> {
-    return await this.playerRepo.find({ relations: [ 'pokemons', 'items' ] });
+    return await this.playerRepo.find({
+      relations: [ 'pokemons', 'items' ]
+    });
   }
 }
