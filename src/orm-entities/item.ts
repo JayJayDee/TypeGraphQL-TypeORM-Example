@@ -1,4 +1,4 @@
-import { PrimaryGeneratedColumn, Column, ManyToMany, JoinTable } from 'typeorm';
+import { PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, Entity } from 'typeorm';
 import { PlayerEntity } from './player';
 
 enum ItemType {
@@ -14,6 +14,7 @@ enum ConsumeType {
   EQUIPMENT = 'EQUIPMENT'
 }
 
+@Entity('item')
 export class ItemEntity {
   @PrimaryGeneratedColumn()
   public no: number;
