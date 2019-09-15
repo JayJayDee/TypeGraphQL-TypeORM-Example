@@ -1,12 +1,26 @@
+import { Repository } from 'typeorm';
 import { Resolver, Query, Arg } from 'type-graphql';
+import { Container } from 'typedi';
 import { Pokemon } from '../graphql-models';
+
+import { PokemonEntity } from '../orm-entities';
+import { ConnectionToken } from '../orm-initiator';
 
 @Resolver(of => Pokemon)
 export class PokemonResolver {
 
+  private pokemonRepo: Repository<PokemonEntity>;
+
+  constructor() {
+    const connection = Container.get(ConnectionToken);
+    this.pokemonRepo = connection.getRepository(PokemonEntity);
+  }
+
   @Query(returns => Pokemon)
   async pokemon(@Arg('id') id: string): Promise<Pokemon | undefined> {
-    return undefined;
+    return await this.pokemonRepo.findOne({ id }, {
+      relations: [ 'ownedBy' ]
+    });
   }
 }
 
