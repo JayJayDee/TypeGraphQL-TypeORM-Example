@@ -15,8 +15,8 @@ the DB relation diagram is same as follows. you can also check this out in `src/
 ![DB E-R Diagram](https://raw.githubusercontent.com/JayJayDee/TypeGraphQL-TypeORM-Example/master/assets/erd.png)
 
 ## How to configure application
+this application uses [dotenv](https://www.npmjs.com/package/dotenv) as a configuration loader.
 TBD
-
 
 ## How to run
 ```bash
@@ -30,5 +30,6 @@ $ npm run test
 ```
 
 ## Next step
-- nested GraphQL schema example
+- nested GraphQL schema example. -> done.
 - nested (releation between tables) entities example -> done
+- GraphQL mutations with permission.
