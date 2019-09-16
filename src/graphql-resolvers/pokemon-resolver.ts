@@ -22,11 +22,17 @@ export class PokemonResolver {
       relations: [ 'ownedBy' ]
     });
   }
+
+  @Query(returns => [ Pokemon ])
+  async pokemons(): Promise<Pokemon[]> {
+    return await this.pokemonRepo.find({
+      relations: [' ownedBy' ]
+    });
+  }
 }
 
 // @Resolver(of => Message)
 // export class MessageResolver {
-
 //   @Query(returns => Message)
 //   async message(@Arg('id') id: number): Promise<Message | undefined> {
 //     const msg = await getConnection().getRepository(MessageEntity).findOne(id);
