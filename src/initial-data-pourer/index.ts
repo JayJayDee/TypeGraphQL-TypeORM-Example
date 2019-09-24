@@ -30,6 +30,10 @@ enum ConsumeType {
   EQUIPMENT = 'EQUIPMENT'
 }
 
+export const initInitialDataPourer = () => {
+
+};
+
 // pours initial data to database.
 export const pourInitialData = async () => {
   const log = Container.get(LoggerToken);
