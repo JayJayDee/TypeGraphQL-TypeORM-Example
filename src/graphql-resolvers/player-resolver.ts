@@ -1,6 +1,6 @@
-import { Resolver, Query, Arg } from 'type-graphql';
+import { Resolver, Query, Arg, FieldResolver, Root } from 'type-graphql';
 import { Repository } from 'typeorm';
-import { Player } from '../graphql-models';
+import { Player, Pokemon, Item } from '../graphql-models';
 import { Container } from 'typedi';
 import { ConnectionToken } from '../orm-initiator';
 import { PlayerEntity } from '../orm-entities';
@@ -9,10 +9,12 @@ import { PlayerEntity } from '../orm-entities';
 export class PlayerResolver {
 
   private playerRepo: Repository<PlayerEntity>;
+  // private pokemonRepo: Repository<PokemonEntity>;
 
   constructor() {
     const connection = Container.get(ConnectionToken);
     this.playerRepo = connection.getRepository(PlayerEntity);
+    // this.pokemonRepo = connection.getRepository(PokemonEntity);
   }
 
   @Query(returns => Player)
@@ -27,5 +29,15 @@ export class PlayerResolver {
     return await this.playerRepo.find({
       relations: [ 'pokemons', 'items' ]
     });
+  }
+
+  @FieldResolver()
+  async pokemons(@Root() player: Player): Promise<Pokemon[]> {
+    return player.pokemons;
+  }
+
+  @FieldResolver()
+  async items(@Root() player: Player): Promise<Item[]> {
+    return player.items;
   }
 }
