@@ -33,11 +33,29 @@ export class PlayerResolver {
 
   @FieldResolver()
   async pokemons(@Root() player: Player): Promise<Pokemon[]> {
-    return player.pokemons;
+    if (player.pokemons) return player.pokemons;
+
+    const found = await this.playerRepo.findOne({
+      where: {
+        id: player.id
+      },
+      relations: [ 'pokemons' ]
+    });
+    if (!found) return [];
+    return found.pokemons;
   }
 
   @FieldResolver()
   async items(@Root() player: Player): Promise<Item[]> {
-    return player.items;
+    if (player.items) return player.items;
+
+    const found = await this.playerRepo.findOne({
+      where: {
+        id: player.id
+      },
+      relations: [ 'items' ]
+    });
+    if (!found) return [];
+    return found.items;
   }
 }

@@ -1,7 +1,7 @@
 import { Repository } from 'typeorm';
-import { Resolver, Query, Arg } from 'type-graphql';
+import { Resolver, Query, Arg, FieldResolver, Root } from 'type-graphql';
 import { Container } from 'typedi';
-import { Pokemon } from '../graphql-models';
+import { Pokemon, Player } from '../graphql-models';
 
 import { PokemonEntity } from '../orm-entities';
 import { ConnectionToken } from '../orm-initiator';
@@ -28,6 +28,20 @@ export class PokemonResolver {
     return await this.pokemonRepo.find({
       relations: [' ownedBy' ]
     });
+  }
+
+  @FieldResolver()
+  async ownedBy(@Root() pokemon: Pokemon): Promise<Player[]> {
+    if (pokemon.ownedBy) return pokemon.ownedBy;
+
+    const found = await this.pokemonRepo.findOne({
+      where: {
+        id: pokemon.id
+      },
+      relations: [ 'ownedBy' ]
+    });
+    if (!found) return [];
+    return found.ownedBy;
   }
 }
 
