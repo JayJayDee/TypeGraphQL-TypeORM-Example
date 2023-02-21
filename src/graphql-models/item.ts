@@ -29,12 +29,18 @@ export class Item {
   @Field(type => ID)
   public id: string;
 
-  @Field()
+  @Field({
+    description: 'name of item'
+  })
   public name: string;
 
-  @Field(type => ItemType)
+  @Field(type => ItemType, {
+    description: 'type of item'
+  })
   public itemType: ItemType;
 
-  @Field(type => ConsumeType)
+  @Field(type => ConsumeType, {
+    description: 'notates that this item is comsumerable or equippable'
+  })
   public consumeType: ConsumeType;
 }

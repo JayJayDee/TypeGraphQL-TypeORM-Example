@@ -25,15 +25,23 @@ export class Pokemon {
   @Field(type => ID)
   id: string;
 
-  @Field()
+  @Field({
+    description: 'name of pokemon'
+  })
   name: string;
 
-  @Field(type => PokemonType)
+  @Field(type => PokemonType, {
+    description: 'type of pokemon'
+  })
   type: PokemonType;
 
-  @Field()
+  @Field({
+    description: 'level of pokemon'
+  })
   level: number;
 
-  @Field(type => [ Player ])
+  @Field(type => [ Player ], {
+    description: 'player who owns this pokemon'
+  })
   ownedBy: Player[];
 }

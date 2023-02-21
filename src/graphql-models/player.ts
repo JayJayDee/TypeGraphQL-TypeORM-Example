@@ -8,15 +8,23 @@ export class Player {
   @Field(type => ID)
   public id: string;
 
-  @Field()
+  @Field({
+    description: 'name of player'
+  })
   public name: string;
 
-  @Field(type => [ Pokemon ])
+  @Field(type => [ Pokemon ], {
+    description: 'Pokemons that owned by player'
+  })
   public pokemons: Pokemon[];
 
-  @Field(type => [ Item ])
+  @Field(type => [ Item ], {
+    description: 'Items in inventory'
+  })
   public items: Item[];
 
-  @Field()
+  @Field({
+    description: 'Money'
+  })
   public fund: number;
 }
