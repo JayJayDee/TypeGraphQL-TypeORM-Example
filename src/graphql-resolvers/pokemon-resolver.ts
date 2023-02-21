@@ -26,7 +26,7 @@ export class PokemonResolver {
   @Query(returns => [ Pokemon ])
   async pokemons(): Promise<Pokemon[]> {
     return await this.pokemonRepo.find({
-      relations: [' ownedBy' ]
+      relations: [ 'ownedBy' ]
     });
   }
 

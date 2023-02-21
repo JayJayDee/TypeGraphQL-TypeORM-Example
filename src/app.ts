@@ -3,13 +3,12 @@ import { ApolloServer } from 'apollo-server';
 import { buildSchema } from 'type-graphql';
 import { Container } from 'typedi';
 
-import { AllResolvers } from './graphql-resolvers';
-
 import { initOrmEntities } from './orm-entities';
 import { initConfiguration, HttpConfigToken } from './configurations';
 import { initLogger, LoggerToken } from './loggers';
 import { initDatabaseConnection } from './orm-initiator';
 import { pourInitialData } from './initial-data-pourer';
+import { AllResolvers } from './graphql-resolvers';
 
 (async () => {
   await initConfiguration();
@@ -24,13 +23,14 @@ import { pourInitialData } from './initial-data-pourer';
   await pourInitialData();
 
   const schema = await buildSchema({
+    // @ts-ignore
     resolvers: AllResolvers(),
     nullableByDefault: true
   });
 
   const server = new ApolloServer({
     schema,
-    playground: true
+    introspection: true
   });
 
   const { url } = await server.listen(http.port);
