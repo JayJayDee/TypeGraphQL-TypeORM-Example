@@ -15,8 +15,15 @@ the DB relation diagram is same as follows. you can also check this out in `src/
 ![DB E-R Diagram](https://raw.githubusercontent.com/JayJayDee/TypeGraphQL-TypeORM-Example/master/assets/erd.png)
 
 ## How to configure application
-this application uses [dotenv](https://www.npmjs.com/package/dotenv) as a configuration loader.
-TBD
+this application uses [dotenv](https://www.npmjs.com/package/dotenv) as a configuration loader. you can place `.env.dev` dotenv file in project root directory to configure run this application.
+```bash
+MYSQL_HOST=127.0.0.1
+MYSQL_PORT=3306
+MYSQL_USER=root
+MYSQL_PASSWORD=my-pokemon-rocks
+MYSQL_DATABASE=pokemon
+HTTP_PORT=4000
+```
 
 ## How to run
 ```bash
